@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code to PNG</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Code to PNG</h1>
+            <p class="subtitle">Transform your code into beautiful images</p>
+        </header>
+
+        <div class="controls">
+            <div class="control-group">
+                <label for="theme-select">Theme:</label>
+                <select id="theme-select">
+                    <option value="palenight" selected>Palenight</option>
+                </select>
+            </div>
+
+            <div class="control-group">
+                <label for="font-select">Font:</label>
+                <select id="font-select">
+                    <option value="jetbrains-mono" selected>JetBrains Mono</option>
+                </select>
+            </div>
+
+            <div class="control-group">
+                <label for="language-select">Language:</label>
+                <select id="language-select">
+                    <option value="csharp" selected>C#</option>
+                </select>
+            </div>
+
+            <div class="control-group">
+                <label for="font-size">Font Size:</label>
+                <input type="number" id="font-size" value="16" min="10" max="32">
+            </div>
+
+            <div class="control-group">
+                <label for="padding">Padding:</label>
+                <input type="number" id="padding" value="60" min="0" max="150">
+            </div>
+
+            <div class="control-group checkbox-group">
+                <label>
+                    <input type="checkbox" id="show-line-numbers" checked>
+                    Show Line Numbers
+                </label>
+            </div>
+        </div>
+
+        <div class="editor-section">
+            <textarea id="code-input" placeholder="Paste your code here..."></textarea>
+        </div>
+
+        <div class="preview-section">
+            <h2>Preview</h2>
+            <div id="preview-container">
+                <canvas id="preview-canvas"></canvas>
+            </div>
+        </div>
+
+        <div class="action-buttons">
+            <button id="generate-btn" class="btn btn-primary">Generate Preview</button>
+            <button id="download-png-btn" class="btn btn-secondary">Download PNG</button>
+            <button id="download-pdf-btn" class="btn btn-secondary">Download PDF</button>
+        </div>
+    </div>
+
+    <script src="themes.js"></script>
+    <script src="fonts.js"></script>
+    <script src="syntax-highlighter.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
