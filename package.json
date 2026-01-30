@@ -1,0 +1,32 @@
+{
+  "name": "codeexport",
+  "version": "1.0.0",
+  "description": "Transform your code into beautiful images",
+  "main": "app.js",
+  "scripts": {
+    "start": "vite --host",
+    "dev": "vite --host",
+    "preview": "vite preview --host"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dreeyanzz/CodeExport.git"
+  },
+  "keywords": [
+    "code",
+    "export",
+    "png",
+    "pdf",
+    "syntax-highlighting",
+    "image-generator"
+  ],
+  "author": "dreeyanzz",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dreeyanzz/CodeExport/issues"
+  },
+  "homepage": "https://github.com/dreeyanzz/CodeExport#readme",
+  "devDependencies": {
+    "vite": "^5.0.0"
+  }
+}
