@@ -19,6 +19,9 @@ const generateBtn = document.getElementById('generate-btn');
 const downloadPngBtn = document.getElementById('download-png-btn');
 const downloadPdfBtn = document.getElementById('download-pdf-btn');
 const previewCanvas = document.getElementById('preview-canvas');
+const previewModal = document.getElementById('preview-modal');
+const modalImage = document.getElementById('modal-image');
+const modalClose = document.querySelector('.modal-close');
 
 // Initialize the application
 function init() {
@@ -57,6 +60,22 @@ function init() {
     
     showLineNumbersCheckbox.addEventListener('change', (e) => {
         showLineNumbers = e.target.checked;
+    });
+    
+    // Modal event listeners
+    previewCanvas.addEventListener('click', openModal);
+    modalClose.addEventListener('click', closeModal);
+    previewModal.addEventListener('click', (e) => {
+        if (e.target === previewModal) {
+            closeModal();
+        }
+    });
+    
+    // Close modal with Escape key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && previewModal.style.display === 'block') {
+            closeModal();
+        }
     });
     
     // Set initial values
@@ -182,8 +201,10 @@ function generatePreview() {
     const dpr = window.devicePixelRatio || 1;
     previewCanvas.width = canvasWidth * dpr;
     previewCanvas.height = canvasHeight * dpr;
-    previewCanvas.style.width = canvasWidth + 'px';
-    previewCanvas.style.height = canvasHeight + 'px';
+    // Remove inline styles to let CSS handle responsive sizing
+    previewCanvas.removeAttribute('style');
+    previewCanvas.setAttribute('data-width', canvasWidth);
+    previewCanvas.setAttribute('data-height', canvasHeight);
     
     ctx.scale(dpr, dpr);
     
@@ -343,6 +364,22 @@ function downloadPDF() {
     // Download the PDF
     const filename = filenameInput.value.trim() || 'code';
     pdf.save(`${filename}.pdf`);
+}
+
+// Open modal with full preview
+function openModal() {
+    if (previewCanvas.width > 0) {
+        const dataURL = previewCanvas.toDataURL('image/png');
+        modalImage.src = dataURL;
+        previewModal.style.display = 'block';
+        document.body.style.overflow = 'hidden'; // Prevent background scrolling
+    }
+}
+
+// Close modal
+function closeModal() {
+    previewModal.style.display = 'none';
+    document.body.style.overflow = 'auto'; // Restore scrolling
 }
 
 // Initialize on page load
