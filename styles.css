@@ -58,7 +58,7 @@ h1 {
     font-size: 0.9rem;
 }
 
-select, input[type="number"] {
+select, input[type="number"], input[type="text"] {
     padding: 8px 12px;
     border: 2px solid #e2e8f0;
     border-radius: 6px;
@@ -67,13 +67,17 @@ select, input[type="number"] {
     transition: border-color 0.2s;
 }
 
-select:focus, input[type="number"]:focus {
+select:focus, input[type="number"]:focus, input[type="text"]:focus {
     outline: none;
     border-color: #667eea;
 }
 
 input[type="number"] {
     width: 80px;
+}
+
+input[type="text"]#filename {
+    width: 200px;
 }
 
 .editor-section {

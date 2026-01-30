@@ -14,6 +14,7 @@ const languageSelect = document.getElementById('language-select');
 const fontSizeInput = document.getElementById('font-size');
 const paddingInput = document.getElementById('padding');
 const showLineNumbersCheckbox = document.getElementById('show-line-numbers');
+const filenameInput = document.getElementById('filename');
 const generateBtn = document.getElementById('generate-btn');
 const downloadPngBtn = document.getElementById('download-png-btn');
 const downloadPdfBtn = document.getElementById('download-pdf-btn');
@@ -247,6 +248,14 @@ function generatePreview() {
     ctx.arc(dotStartX + dotSpacing * 2, dotY, dotRadius, 0, Math.PI * 2);
     ctx.fill();
     
+    // Draw filename in the header (centered)
+    const filename = filenameInput.value.trim() || 'Untitled';
+    ctx.fillStyle = theme.foreground;
+    ctx.font = `600 ${currentFontSize - 2}px ${font.family}`;
+    ctx.textAlign = 'center';
+    ctx.fillText(filename, rectX + rectWidth / 2, dotY - 5);
+    ctx.textAlign = 'left'; // Reset to left align for code
+    
     // Render code with syntax highlighting and line numbers
     ctx.font = `${currentFontSize}px ${font.family}`;
     ctx.textBaseline = 'top';
@@ -302,7 +311,8 @@ function generatePreview() {
 function downloadPNG() {
     const dataURL = previewCanvas.toDataURL('image/png');
     const link = document.createElement('a');
-    link.download = `code-${Date.now()}.png`;
+    const filename = filenameInput.value.trim() || 'code';
+    link.download = `${filename}.png`;
     link.href = dataURL;
     link.click();
 }
@@ -331,7 +341,8 @@ function downloadPDF() {
     pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
     
     // Download the PDF
-    pdf.save(`code-${Date.now()}.pdf`);
+    const filename = filenameInput.value.trim() || 'code';
+    pdf.save(`${filename}.pdf`);
 }
 
 // Initialize on page load
